@@ -2,14 +2,23 @@ import { useParams } from 'react-router-dom'
 import { RES_IMG_BASE_URL } from '../../utils/constants'
 import Shimmer from './Shimmer'
 import useResMenuData from '../../utils/useResMenuData'
+import { useDispatch } from 'react-redux'
+import { addItems } from '../../utils/cartSlice'
 
 const MenuCard = (props) => {
     const { menuData } = props
     const { title, itemCards } = menuData
+
+    const dispatch = useDispatch()
+
+    function clickHandler(item) {
+        dispatch(addItems({ item }))
+    }
+
     return (
         <div>
             {(itemCards) ? <h1 className='text-lg font-medium'>{title}</h1> : null}
-            {itemCards?.map((x) => <h3 key={x.card.info.id}>{x.card.info.name + " - " + "₹" + (x.card.info.price?x.card.info.price/ 100: x.card.info.defaultPrice/ 100)}</h3>)}
+            {itemCards?.map((x) => <h3 key={x.card.info.id}>{x.card.info.name + " - " + "₹" + (x.card.info.price ? x.card.info.price / 100 : x.card.info.defaultPrice / 100)}<span><button className='bg-green-200 p-1 rounded-lg m-2 text-sm font-medium' onClick={() => clickHandler(x.card.info)}>Add</button></span></h3>)}
         </div>
 
     )
