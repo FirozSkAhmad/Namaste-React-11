@@ -6,7 +6,7 @@ const ShimmerBox = () => {
 
 const Shimmer = () => {
     return (
-        <div className="flex flex-wrap justify-center gap-5">
+        <div className="flex flex-wrap justify-center gap-5" data-testid="shimmer">
             {Array(15).fill("").map((x, ind) => <ShimmerBox key={ind} />)}
         </div>
     )

@@ -18,7 +18,7 @@ const MenuCard = (props) => {
     return (
         <div>
             {(itemCards) ? <h1 className='text-lg font-medium'>{title}</h1> : null}
-            {itemCards?.map((x) => <h3 key={x.card.info.id}>{x.card.info.name + " - " + "₹" + (x.card.info.price ? x.card.info.price / 100 : x.card.info.defaultPrice / 100)}<span><button className='bg-green-200 p-1 rounded-lg m-2 text-sm font-medium' onClick={() => clickHandler(x.card.info)}>Add</button></span></h3>)}
+            {itemCards?.map((x) => <h3 key={x.card.info.id}>{x.card.info.name + " - " + "₹" + (x.card.info.price ? x.card.info.price / 100 : x.card.info.defaultPrice / 100)}<span><button className='bg-green-200 p-1 rounded-lg m-2 text-sm font-medium' data-testid="addBtn" onClick={() => clickHandler(x.card.info)}>Add</button></span></h3>)}
         </div>
 
     )
@@ -33,14 +33,14 @@ const ResturantMenu = () => {
     console.log(menuData)
 
     return (menuData?.length !== 0) ? (
-        <div className='flex gap-5 mt-3'>
+        <div className='flex gap-5 mt-3' data-testid="resMenu">
             <div className='resData-con'>
                 <h2>Resturant Id:{resData?.id}</h2>
                 <h2>{resData?.name}</h2>
                 <img alt="res-img" src={RES_IMG_BASE_URL + resData?.cloudinaryImageId}></img>
                 <h4>{resData?.avgRating} stars, {resData?.sla?.maxDeliveryTime} mins</h4>
             </div>
-            <div className='flex flex-wrap w-7/12 gap-4'>
+            <div className='flex flex-wrap w-7/12 gap-4' data-testid='menuCon'>
                 {menuData?.map((data, ind) => <MenuCard className="w-52" key={ind} menuData={data.card.card} />)}
             </div>
         </div>
